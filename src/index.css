@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-label: #747f93;
   --color-main: #4169e1;
   --color-main-background: #e7edf0;
   --radius-sm: calc(var(--radius) - 4px);
@@ -26,7 +27,7 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
-  --color-input: var(--input);
+  --color-input: #adb8cb;
   --color-ring: var(--ring);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
