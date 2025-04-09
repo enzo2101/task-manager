@@ -13,16 +13,10 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Popover,
   PopoverContent,
@@ -31,13 +25,14 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
+import { MultiSelect } from "@/components/ui/multi-select";
 
 const formSchema = z.object({
   title: z.string().min(2, {
-    message: "O título deve ter pelo menos 2 caracteres.",
+    message: "O título deve ter pelo menos 5 caracteres.",
   }),
-  description: z.string().optional(),
-  responsible: z.string().min(1, {
+  description: z.string(),
+  responsible: z.string().array().min(1, {
     message: "Por favor selecione um responsável.",
   }),
   dueDate: z.date({
@@ -57,11 +52,16 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
     defaultValues: {
       title: "",
       description: "",
-      responsible: "",
+      responsible: [],
     },
   });
 
-  // Reset form when component mounts
+  const responsibles = [
+    { value: "Matheus Gomes", label: "Matheus Gomes" },
+    { value: "Pedro Paulo", label: "Pedro Paulo" },
+    { value: "Paulo", label: "Paulo" },
+  ];
+
   useEffect(() => {
     form.reset();
   }, [form]);
@@ -78,6 +78,7 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
               <FormControl>
                 <Input {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -90,6 +91,7 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
               <FormControl>
                 <Textarea className="min-h-[134px]" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -99,18 +101,15 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Responsáveis</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="Matheus Gomes">Matheus Gomes</SelectItem>
-                  <SelectItem value="Pedro Paulo">Pedro Paulo</SelectItem>
-                  <SelectItem value="Paulo">Paulo</SelectItem>
-                </SelectContent>
-              </Select>
+              <MultiSelect
+                options={responsibles}
+                onValueChange={field.onChange}
+                variant="default"
+                animation={2}
+                maxCount={3}
+                placeholder=""
+              />
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -150,6 +149,7 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
                     />
                   </PopoverContent>
                 </Popover>
+                <FormMessage />
               </FormItem>
             )}
           />

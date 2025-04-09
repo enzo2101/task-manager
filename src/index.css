@@ -4,8 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-error: #e14942;
+  --color-danger: #ffa500;
+  --color-success: #63b150;
   --color-label: #747f93;
   --color-main: #4169e1;
+  --color-secound: #1e90ff;
   --color-main-background: #e7edf0;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

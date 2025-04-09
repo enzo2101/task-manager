@@ -13,7 +13,7 @@ interface Task {
   id: Id;
   columnId: Id;
   title: string;
-  responsible: string;
-  dueDate: Date;
+  responsible: Array<string>;
+  dueDate: Moment;
   description?: string | undefined;
 }
