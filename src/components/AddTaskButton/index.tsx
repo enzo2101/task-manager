@@ -12,10 +12,20 @@ import {
 } from "@/components/ui/dialog";
 import FormTask, { FormTaskValues } from "./FormTask";
 
-const AddTaskButton: React.FC = () => {
+interface AddTaskButtonProps {
+  createTask: (task: FormTaskValues) => void;
+}
+
+const AddTaskButton: React.FC<AddTaskButtonProps> = ({ createTask }) => {
   const [open, setOpen] = useState(false);
 
   function handleSubmit(values: FormTaskValues) {
+    createTask({
+      title: values.title,
+      description: values.description,
+      dueDate: values.dueDate,
+      responsible: values.responsible,
+    });
     console.log(values);
     setOpen(false);
   }
