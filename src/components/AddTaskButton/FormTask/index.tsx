@@ -36,7 +36,7 @@ const formSchema = z.object({
   title: z.string().min(2, {
     message: "O título deve ter pelo menos 2 caracteres.",
   }),
-  description: z.string().optional(),
+  description: z.string(),
   responsible: z.string().min(1, {
     message: "Por favor selecione um responsável.",
   }),
@@ -61,7 +61,6 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
     },
   });
 
-  // Reset form when component mounts
   useEffect(() => {
     form.reset();
   }, [form]);

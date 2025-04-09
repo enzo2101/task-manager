@@ -14,6 +14,6 @@ interface Task {
   columnId: Id;
   title: string;
   responsible: string;
-  dueDate: Date;
+  dueDate: Moment;
   description?: string | undefined;
 }
