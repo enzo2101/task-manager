@@ -9,8 +9,6 @@ interface ColumnContainerProps {
 }
 
 const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
-  console.log(tasks);
-
   const { setNodeRef, attributes, listeners, transform, transition } =
     useSortable({
       id: column.id,

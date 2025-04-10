@@ -24,7 +24,6 @@ const AddTaskButton: React.FC<AddTaskButtonProps> = ({ createTask }) => {
       dueDate: values.dueDate,
       responsible: values.responsible,
     });
-    console.log(values);
     setOpen(false);
   }
 
