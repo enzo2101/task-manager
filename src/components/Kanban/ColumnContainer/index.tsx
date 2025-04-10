@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import TaskCard from "../TaskCard";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ColumnContainerProps {
   column: Column;
@@ -25,7 +26,7 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
   }, [tasks]);
 
   return (
-    <div ref={setNodeRef} style={style} className="gap-3">
+    <div ref={setNodeRef} style={style} className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <p
           {...attributes}
@@ -36,13 +37,15 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
         </p>
         <p className="text-label text-sm">{tasks.length.toString()} tarefa</p>
       </div>
-      <div className="flex flex-col gap-3 pt-3">
-        <SortableContext items={tasksId}>
-          {tasks.map((task) => (
-            <TaskCard key={task.id} task={task} />
-          ))}
-        </SortableContext>
-      </div>
+      <ScrollArea className="h-96 rounded-3xl">
+        <div className="flex flex-col gap-3">
+          <SortableContext items={tasksId}>
+            {tasks.map((task) => (
+              <TaskCard key={task.id} task={task} />
+            ))}
+          </SortableContext>
+        </div>
+      </ScrollArea>
     </div>
   );
 };
