@@ -26,7 +26,7 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
   }, [tasks]);
 
   return (
-    <div ref={setNodeRef} style={style} className="flex flex-col">
+    <div ref={setNodeRef} style={style} className="flex flex-col min-w-80">
       <div className="flex flex-col gap-2">
         <p
           {...attributes}
