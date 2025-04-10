@@ -4,6 +4,9 @@ import {
   DragOverEvent,
   DragOverlay,
   DragStartEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import ColumnContainer from "./ColumnContainer";
@@ -17,6 +20,14 @@ interface Kanban {
 
 const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
   const [activeTask, setActiveTask] = useState<Task | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 3,
+      },
+    })
+  );
 
   const columns = useMemo(() => {
     return [
@@ -76,7 +87,11 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      <DndContext onDragStart={onDragStart} onDragOver={onDragOver}>
+      <DndContext
+        sensors={sensors}
+        onDragStart={onDragStart}
+        onDragOver={onDragOver}
+      >
         <SortableContext items={columnsId}>
           {columns.map((column) => (
             <ColumnContainer

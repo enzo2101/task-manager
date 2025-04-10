@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-box: #f1f3f6;
   --color-error: #e14942;
   --color-danger: #ffa500;
   --color-success: #63b150;
