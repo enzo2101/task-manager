@@ -1,5 +1,3 @@
-"use client";
-
 import type React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import moment from "moment";
