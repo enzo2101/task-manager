@@ -11,7 +11,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,7 +32,7 @@ const formSchema = z.object({
     message: "A descrição deve ter pelo menos 10 caracteres.",
   }),
   responsible: z.string().array().min(1, {
-    message: "Por favor selecione um responsável.",
+    message: "Selecione um responsável.",
   }),
   dueDate: z.date({
     required_error: "Por favor selecione uma data.",
@@ -76,9 +75,12 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
             <FormItem>
               <FormLabel>Título da tarefa</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  placeholder={form.formState.errors.title?.message || ""}
+                  className="placeholder:text-error"
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -90,11 +92,11 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
               <FormLabel>Descrição da tarefa</FormLabel>
               <FormControl>
                 <Textarea
-                  className="max-h-36 resize-none overflow-y-auto no-scrollbar"
+                  placeholder={form.formState.errors.description?.message || ""}
+                  className="max-h-36 resize-none overflow-y-auto no-scrollbar placeholder:text-error"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -106,15 +108,14 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
               <FormLabel>Responsáveis</FormLabel>
               <FormControl>
                 <MultiSelect
+                  placeholder={form.formState.errors.responsible?.message || ""}
                   options={responsibles}
                   onValueChange={field.onChange}
                   variant="default"
                   animation={2}
                   maxCount={3}
-                  placeholder=""
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -136,11 +137,14 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
                         )}
                         type="button"
                       >
-                        {field.value ? (
+                        {form.formState.errors.dueDate?.message ? (
+                          <span className="text-error">Data invalida</span>
+                        ) : field.value ? (
                           format(field.value, "dd/MM/yyyy")
                         ) : (
-                          <span className="text-[#ADB8CB]">Data:</span>
+                          <span className="text-input">Data:</span>
                         )}
+
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
                     </FormControl>
@@ -154,7 +158,6 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
                     />
                   </PopoverContent>
                 </Popover>
-                <FormMessage />
               </FormItem>
             )}
           />
