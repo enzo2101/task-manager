@@ -35,13 +35,15 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
         >
           {column.title}
         </p>
-        <p className="text-label text-sm">{tasks.length.toString()} tarefa</p>
+        <p className="text-label text-sm">
+          {`${tasks.length} ${tasks.length <= 1 ? "tarefa" : "tarefas"}`}
+        </p>
       </div>
-      <ScrollArea className="h-[60dvh] rounded-3xl">
-        <div className="flex flex-col gap-3">
+      <ScrollArea className="h- rounded-3xl">
+        <div className="flex flex-col gap-3 pt-2">
           <SortableContext items={tasksId}>
             {tasks.map((task) => (
-              <TaskCard key={task.id} task={task} />
+              <TaskCard key={task.id} task={task} columnId={column.id} />
             ))}
           </SortableContext>
         </div>

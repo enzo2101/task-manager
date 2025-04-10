@@ -4,12 +4,14 @@ import { CSS } from "@dnd-kit/utilities";
 import moment from "moment";
 import { cn } from "@/lib/utils";
 import TaskModal from "../TaskModal";
+import { ArchiveTick } from "iconsax-react";
 
 interface TaskCardProps {
   task: Task;
+  columnId?: Id;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task, columnId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const renderDaysRemaining = useMemo(() => {
@@ -56,16 +58,29 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     return <div ref={setNodeRef} style={style} />;
   }
 
+  const isTaskCompleted = columnId === 4;
+
   return (
     <>
       <div
-        className="bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-52"
+        className={cn(
+          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-52 relative",
+          { "border border-success": isTaskCompleted }
+        )}
         ref={setNodeRef}
         style={style}
         onClick={() => setIsModalOpen(true)}
         {...attributes}
         {...listeners}
       >
+        {isTaskCompleted && (
+          <ArchiveTick
+            size={20}
+            color="#63b150"
+            variant="Bold"
+            className="absolute top-[-5px] left-5.5"
+          />
+        )}
         <div className="flex flex-col gap-2">
           <h1 className="text-base font-semibold">{task.title}</h1>
           <p className="text-sm text-label line-clamp-2 h-fit">

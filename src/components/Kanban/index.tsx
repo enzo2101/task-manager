@@ -24,7 +24,7 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 3,
+        distance: 5,
       },
     })
   );
