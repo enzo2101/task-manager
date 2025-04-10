@@ -89,7 +89,10 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
             <FormItem>
               <FormLabel>Descrição da tarefa</FormLabel>
               <FormControl>
-                <Textarea className="min-h-[134px]" {...field} />
+                <Textarea
+                  className="max-h-36 resize-none overflow-y-auto no-scrollbar"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
