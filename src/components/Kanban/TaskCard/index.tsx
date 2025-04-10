@@ -64,7 +64,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, columnId }) => {
     <>
       <div
         className={cn(
-          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-52 relative",
+          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative",
           { "border border-success": isTaskCompleted }
         )}
         ref={setNodeRef}
@@ -83,9 +83,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, columnId }) => {
         )}
         <div className="flex flex-col gap-2">
           <h1 className="text-base font-semibold">{task.title}</h1>
-          <p className="text-sm text-label line-clamp-2 h-fit">
-            {task.description}
-          </p>
+          <div className="h-10">
+            <p className="text-sm text-label line-clamp-2">
+              {task.description}
+            </p>
+          </div>
         </div>
         <div className="border border-label border-dashed rounded-xl flex justify-between">
           <p className="p-2 text-xs text-label">

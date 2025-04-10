@@ -86,7 +86,7 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="min-w-screen grid grid-cols-4 horizontal gap-4">
       <DndContext
         sensors={sensors}
         onDragStart={onDragStart}

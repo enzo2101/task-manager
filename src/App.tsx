@@ -53,13 +53,15 @@ function App() {
         </div>
         <div className="flex flex-col gap-4">
           <CarouselButtons />
-          {fetchTasks.isLoading ? (
-            <div>
-              <Spinner />
-            </div>
-          ) : (
-            <Kanban setTasks={setTasks} tasks={tasks} />
-          )}
+          <div className="max-w-dvw overflow-auto [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-input">
+            {fetchTasks.isLoading ? (
+              <div>
+                <Spinner />
+              </div>
+            ) : (
+              <Kanban setTasks={setTasks} tasks={tasks} />
+            )}
+          </div>
         </div>
       </div>
     </div>

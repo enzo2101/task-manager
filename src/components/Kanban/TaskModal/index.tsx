@@ -61,7 +61,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, isOpen, onClose }) => {
               </div>
             </div>
           </div>
-          <div className="bg-box rounded-xl p-4 max-h-40 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-label dark:hover:[&::-webkit-scrollbar-thumb]:bg-neutral-500/90">
+          <div className="bg-box rounded-xl p-4 max-h-40 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-input">
             <p className="text-sm text-label">{task.description}</p>
           </div>
         </div>
