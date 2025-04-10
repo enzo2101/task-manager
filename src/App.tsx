@@ -6,6 +6,7 @@ import Kanban from "./components/Kanban";
 import { FormTaskValues } from "./components/AddTaskButton/FormTask";
 import useStartTasks from "./hooks/StartTasks";
 import { useQuery } from "react-query";
+import { ColumnIdByStatusMap } from "./lib/enums";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -13,20 +14,6 @@ function App() {
   const { getTasks } = useStartTasks();
 
   const fetchTasks = useQuery(["tasks"], getTasks);
-
-  enum StartTasksStatus {
-    BACKLOG = "backlog",
-    TODO = "todo",
-    DOING = "doing",
-    DEVELOPED = "developed",
-  }
-
-  const ColumnIdByStatusMap = {
-    [StartTasksStatus.BACKLOG]: 1,
-    [StartTasksStatus.TODO]: 2,
-    [StartTasksStatus.DOING]: 3,
-    [StartTasksStatus.DEVELOPED]: 4,
-  };
 
   useEffect(() => {
     if (fetchTasks.data) {
