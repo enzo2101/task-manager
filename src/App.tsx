@@ -7,6 +7,7 @@ import { FormTaskValues } from "./components/AddTaskButton/FormTask";
 import useStartTasks from "./hooks/StartTasks";
 import { useQuery } from "react-query";
 import { ColumnIdByStatusMap } from "./lib/enums";
+import { Spinner } from "./components/ui/spinner";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -25,8 +26,6 @@ function App() {
       setTasks(tasksWithColumnId);
     }
   }, [fetchTasks.data]);
-
-  console.log(fetchTasks.data);
 
   const generateId = () => {
     return Math.floor(Math.random() * 10001);
@@ -54,7 +53,13 @@ function App() {
         </div>
         <div className="flex flex-col gap-4">
           <CarouselButtons />
-          <Kanban setTasks={setTasks} tasks={tasks} />
+          {fetchTasks.isLoading ? (
+            <div>
+              <Spinner />
+            </div>
+          ) : (
+            <Kanban setTasks={setTasks} tasks={tasks} />
+          )}
         </div>
       </div>
     </div>
