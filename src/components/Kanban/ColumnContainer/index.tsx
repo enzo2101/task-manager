@@ -26,14 +26,17 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
 
   return (
     <div ref={setNodeRef} style={style} className="gap-3">
-      <p
-        {...attributes}
-        {...listeners}
-        className="grid-cols-1 text-lg font-semibold items-center p-4"
-      >
-        {column.title}
-      </p>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
+        <p
+          {...attributes}
+          {...listeners}
+          className="grid-cols-1 text-lg font-semibold items-center"
+        >
+          {column.title}
+        </p>
+        <p className="text-label text-sm">{tasks.length.toString()} tarefa</p>
+      </div>
+      <div className="flex flex-col gap-3 pt-3">
         <SortableContext items={tasksId}>
           {tasks.map((task) => (
             <TaskCard key={task.id} task={task} />
