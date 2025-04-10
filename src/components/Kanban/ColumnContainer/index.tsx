@@ -26,7 +26,7 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
   }, [tasks]);
 
   return (
-    <div ref={setNodeRef} style={style} className="flex flex-col gap-4">
+    <div ref={setNodeRef} style={style} className="flex flex-col">
       <div className="flex flex-col gap-2">
         <p
           {...attributes}
@@ -39,7 +39,7 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
           {`${tasks.length} ${tasks.length <= 1 ? "tarefa" : "tarefas"}`}
         </p>
       </div>
-      <ScrollArea className="h- rounded-3xl">
+      <ScrollArea className="h-[60dvh] rounded-3xl">
         <div className="flex flex-col gap-3 pt-2">
           <SortableContext items={tasksId}>
             {tasks.map((task) => (

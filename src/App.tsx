@@ -46,7 +46,7 @@ function App() {
   };
 
   return (
-    <div className="bg-main-background h-screen py-6 px-28">
+    <div className="bg-main-background min-h-screen py-6 px-28">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col justify-center items-center">
           <Header />
