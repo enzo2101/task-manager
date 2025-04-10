@@ -17,3 +17,7 @@ interface Task {
   dueDate: Moment;
   description?: string | undefined;
 }
+
+interface ApiTask extends Task {
+  status: StartTasksStatus;
+}

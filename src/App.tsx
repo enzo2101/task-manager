@@ -1,12 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTaskButton from "./components/AddTaskButton";
 import CarouselButtons from "./components/CarouselButtons";
 import Header from "./components/Header";
 import Kanban from "./components/Kanban";
 import { FormTaskValues } from "./components/AddTaskButton/FormTask";
+import useStartTasks from "./hooks/StartTasks";
+import { useQuery } from "react-query";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
+
+  const { getTasks } = useStartTasks();
+
+  const fetchTasks = useQuery(["tasks"], getTasks);
+
+  enum StartTasksStatus {
+    BACKLOG = "backlog",
+    TODO = "todo",
+    DOING = "doing",
+    DEVELOPED = "developed",
+  }
+
+  const ColumnIdByStatusMap = {
+    [StartTasksStatus.BACKLOG]: 1,
+    [StartTasksStatus.TODO]: 2,
+    [StartTasksStatus.DOING]: 3,
+    [StartTasksStatus.DEVELOPED]: 4,
+  };
+
+  useEffect(() => {
+    if (fetchTasks.data) {
+      const tasksWithColumnId = fetchTasks.data.map((task) => ({
+        ...task,
+        columnId:
+          ColumnIdByStatusMap[task.status as keyof typeof ColumnIdByStatusMap],
+      }));
+      setTasks(tasksWithColumnId);
+    }
+  }, [fetchTasks.data]);
+
+  console.log(fetchTasks.data);
 
   const generateId = () => {
     return Math.floor(Math.random() * 10001);
