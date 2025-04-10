@@ -26,10 +26,12 @@ import { useEffect } from "react";
 import { MultiSelect } from "@/components/ui/multi-select";
 
 const formSchema = z.object({
-  title: z.string().min(2, {
+  title: z.string().min(5, {
     message: "O título deve ter pelo menos 5 caracteres.",
   }),
-  description: z.string(),
+  description: z.string().min(10, {
+    message: "A descrição deve ter pelo menos 10 caracteres.",
+  }),
   responsible: z.string().array().min(1, {
     message: "Por favor selecione um responsável.",
   }),
@@ -99,14 +101,16 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Responsáveis</FormLabel>
-              <MultiSelect
-                options={responsibles}
-                onValueChange={field.onChange}
-                variant="default"
-                animation={2}
-                maxCount={3}
-                placeholder=""
-              />
+              <FormControl>
+                <MultiSelect
+                  options={responsibles}
+                  onValueChange={field.onChange}
+                  variant="default"
+                  animation={2}
+                  maxCount={3}
+                  placeholder=""
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
