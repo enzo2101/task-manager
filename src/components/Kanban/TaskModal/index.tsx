@@ -38,7 +38,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[448px]">
+      <DialogContent>
         <div className="grid gap-4 py-4">
           <div className="flex justify-between items-start">
             <div className="flex flex-col gap-2">

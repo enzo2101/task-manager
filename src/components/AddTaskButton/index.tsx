@@ -39,7 +39,7 @@ const AddTaskButton: React.FC<AddTaskButtonProps> = ({ createTask }) => {
           </Button>
         </DialogTrigger>
         {open && (
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent>
             <DialogHeader>
               <DialogTitle className="text-lg font-medium">
                 Adicionar tarefa
