@@ -1,8 +1,9 @@
 import React from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import pages from "./pages";
+import RoutesPath from "./routes";
 
 const AppRouter: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter: React.FC = () => {
           element={<page.component />}
         />
       ))}
+      <Route path="*" element={<Navigate to={RoutesPath.vagas} replace />} />
     </Routes>
   );
 };
