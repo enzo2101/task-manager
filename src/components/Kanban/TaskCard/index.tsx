@@ -1,14 +1,17 @@
 import { useSortable } from "@dnd-kit/sortable";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { CSS } from "@dnd-kit/utilities";
 import moment from "moment";
 import { cn } from "@/lib/utils";
+import TaskModal from "../TaskModal";
 
 interface TaskCardProps {
   task: Task;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const renderDaysRemaining = useMemo(() => {
     const today = moment().startOf("day");
     const finalDay = moment(task.dueDate).startOf("day");
@@ -54,31 +57,39 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   }
 
   return (
-    <div
-      className="bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)]"
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-    >
-      <div className="flex flex-col gap-2">
-        <h1 className="text-base font-semibold">{task.title}</h1>
-        <p className="text-sm text-label">{task.description}</p>
-      </div>
-      <div className="border border-label border-dashed rounded-xl flex justify-between">
-        <p className="p-2 text-xs text-label">
-          Data limite: {moment(task.dueDate).format("DD/MM/YYYY")}
-        </p>
-        {renderDaysRemaining}
-      </div>
-      <div className="flex gap-2">
-        {task.responsible.map((responsible) => (
-          <p className="bg-secound rounded-lg p-2 text-white text-center text-xs w-fit h-fit">
-            {responsible}
+    <>
+      <div
+        className="bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)]"
+        ref={setNodeRef}
+        style={style}
+        onClick={() => setIsModalOpen(true)}
+        {...attributes}
+        {...listeners}
+      >
+        <div className="flex flex-col gap-2">
+          <h1 className="text-base font-semibold">{task.title}</h1>
+          <p className="text-sm text-label">{task.description}</p>
+        </div>
+        <div className="border border-label border-dashed rounded-xl flex justify-between">
+          <p className="p-2 text-xs text-label">
+            Data limite: {moment(task.dueDate).format("DD/MM/YYYY")}
           </p>
-        ))}
+          {renderDaysRemaining}
+        </div>
+        <div className="flex gap-2">
+          {task.responsible.map((responsible) => (
+            <p className="bg-secound rounded-lg p-2 text-white text-center text-xs w-fit h-fit">
+              {responsible}
+            </p>
+          ))}
+        </div>
       </div>
-    </div>
+      <TaskModal
+        task={task}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 };
 
