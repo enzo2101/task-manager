@@ -37,7 +37,7 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
         </p>
         <p className="text-label text-sm">{tasks.length.toString()} tarefa</p>
       </div>
-      <ScrollArea className="h-96 rounded-3xl">
+      <ScrollArea className="h-[60dvh] rounded-3xl">
         <div className="flex flex-col gap-3">
           <SortableContext items={tasksId}>
             {tasks.map((task) => (
