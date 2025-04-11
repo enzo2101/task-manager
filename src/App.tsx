@@ -8,6 +8,7 @@ import useStartTasks from "./hooks/StartTasks";
 import { useQuery } from "react-query";
 import { ColumnIdByStatusMap } from "./lib/enums";
 import { Spinner } from "./components/ui/spinner";
+import { generateId } from "./lib/helpers";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -27,18 +28,11 @@ function App() {
     }
   }, [fetchTasks.data]);
 
-  const generateId = () => {
-    return Math.floor(Math.random() * 10001);
-  };
-
-  const createTask = (task: FormTaskValues) => {
+  const createTask = (values: FormTaskValues) => {
     const newTask: Task = {
       id: generateId(),
       columnId: 1,
-      title: task.title,
-      description: task.description,
-      responsible: task.responsible,
-      dueDate: task.dueDate,
+      ...values,
     };
 
     setTasks([...tasks, newTask]);

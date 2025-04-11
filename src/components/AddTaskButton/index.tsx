@@ -18,12 +18,7 @@ const AddTaskButton: React.FC<AddTaskButtonProps> = ({ createTask }) => {
   const [open, setOpen] = useState(false);
 
   function handleSubmit(values: FormTaskValues) {
-    createTask({
-      title: values.title,
-      description: values.description,
-      dueDate: values.dueDate,
-      responsible: values.responsible,
-    });
+    createTask(values);
     setOpen(false);
   }
 
