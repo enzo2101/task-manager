@@ -55,7 +55,6 @@ export const coordinateGetter: KeyboardCoordinateGetter = (
             return;
           }
           if (collisionRect.top < rect.top) {
-            // find all droppable areas below
             filteredContainers.push(entry);
           }
           break;
@@ -64,18 +63,15 @@ export const coordinateGetter: KeyboardCoordinateGetter = (
             return;
           }
           if (collisionRect.top > rect.top) {
-            // find all droppable areas above
             filteredContainers.push(entry);
           }
           break;
         case KeyboardCode.Left:
           if (collisionRect.left >= rect.left + rect.width) {
-            // find all droppable areas to left
             filteredContainers.push(entry);
           }
           break;
         case KeyboardCode.Right:
-          // find all droppable areas to right
           if (collisionRect.left + collisionRect.width <= rect.left) {
             filteredContainers.push(entry);
           }

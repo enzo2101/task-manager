@@ -17,10 +17,10 @@ interface AddTaskButtonProps {
 const AddTaskButton: React.FC<AddTaskButtonProps> = ({ createTask }) => {
   const [open, setOpen] = useState(false);
 
-  function handleSubmit(values: FormTaskValues) {
+  const handleSubmit = (values: FormTaskValues) => {
     createTask(values);
     setOpen(false);
-  }
+  };
 
   return (
     <div className="bg-white py-4 px-6 w-fit rounded-b-2xl shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)]">
