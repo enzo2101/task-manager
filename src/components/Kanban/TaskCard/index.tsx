@@ -54,11 +54,53 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, columnId }) => {
     transform: CSS.Transform.toString(transform),
   };
 
-  if (isDragging) {
-    return <div ref={setNodeRef} style={style} />;
-  }
-
   const isTaskCompleted = columnId === 4;
+
+  if (isDragging) {
+    return (
+      <div
+        className={cn(
+          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative",
+          { "border border-success": isTaskCompleted }
+        )}
+        ref={setNodeRef}
+        style={style}
+        onClick={() => setIsModalOpen(true)}
+        {...attributes}
+        {...listeners}
+      >
+        {isTaskCompleted && (
+          <ArchiveTick
+            size={20}
+            color="#63b150"
+            variant="Bold"
+            className="absolute top-[-5px] left-5.5"
+          />
+        )}
+        <div className="flex flex-col gap-2">
+          <h1 className="text-base font-semibold">{task.title}</h1>
+          <div className="h-10">
+            <p className="text-sm text-label line-clamp-2">
+              {task.description}
+            </p>
+          </div>
+        </div>
+        <div className="border border-label border-dashed rounded-xl flex justify-between">
+          <p className="p-2 text-xs text-label">
+            Data limite: {moment(task.dueDate).format("DD/MM/YYYY")}
+          </p>
+          {renderDaysRemaining}
+        </div>
+        <div className="flex gap-2">
+          {task.responsible.map((responsible) => (
+            <p className="bg-secound rounded-lg p-2 text-white text-center text-xs w-fit h-fit">
+              {responsible}
+            </p>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
