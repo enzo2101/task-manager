@@ -4,7 +4,10 @@ import {
   DragOverEvent,
   DragOverlay,
   DragStartEvent,
+  KeyboardSensor,
+  MouseSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -12,6 +15,7 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import ColumnContainer from "./ColumnContainer";
 import TaskCard from "./TaskCard";
 import { createPortal } from "react-dom";
+import { coordinateGetter } from "./multipleContainersKeyboardPreset";
 
 interface Kanban {
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
@@ -22,6 +26,11 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
   const sensors = useSensors(
+    useSensor(MouseSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: coordinateGetter,
+    }),
     useSensor(PointerSensor, {
       activationConstraint: {
         distance: 5,
