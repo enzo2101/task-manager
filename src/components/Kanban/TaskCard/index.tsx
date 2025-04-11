@@ -59,24 +59,15 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, columnId }) => {
   if (isDragging) {
     return (
       <div
-        className={cn(
-          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative",
-          { "border border-success": isTaskCompleted }
-        )}
+        className={
+          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative opacity-30"
+        }
         ref={setNodeRef}
         style={style}
         onClick={() => setIsModalOpen(true)}
         {...attributes}
         {...listeners}
       >
-        {isTaskCompleted && (
-          <ArchiveTick
-            size={20}
-            color="#63b150"
-            variant="Bold"
-            className="absolute top-[-5px] left-5.5"
-          />
-        )}
         <div className="flex flex-col gap-2">
           <h1 className="text-base font-semibold">{task.title}</h1>
           <div className="h-10">
@@ -106,7 +97,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, columnId }) => {
     <>
       <div
         className={cn(
-          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative",
+          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative cursor-grab focus:cursor-grabbing",
           { "border border-success": isTaskCompleted }
         )}
         ref={setNodeRef}
@@ -117,7 +108,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, columnId }) => {
       >
         {isTaskCompleted && (
           <ArchiveTick
-            size={20}
+            size={30}
             color="#63b150"
             variant="Bold"
             className="absolute top-[-5px] left-5.5"
