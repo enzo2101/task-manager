@@ -11,3 +11,8 @@ export const ColumnIdByStatusMap = {
   [StartTasksStatus.DOING]: 3,
   [StartTasksStatus.DEVELOPED]: 4,
 };
+
+export enum ThemeColors {
+  ERROR = "#e14942",
+  SUCCESS = "#63b150",
+}

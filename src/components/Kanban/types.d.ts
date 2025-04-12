@@ -15,7 +15,7 @@ interface Task {
   title: string;
   responsible: Array<string>;
   dueDate: Moment;
-  description?: string | undefined;
+  description: string;
 }
 
 interface ApiTask extends Task {

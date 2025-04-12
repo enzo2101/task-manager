@@ -2,6 +2,7 @@ import type React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import moment from "moment";
 import { cn } from "@/lib/utils";
+import { formatResponsibleNames } from "@/lib/helpers";
 
 interface TaskModalProps {
   task: Task | null;
@@ -23,16 +24,6 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, isOpen, onClose }) => {
     "text-danger": diff < 10 && diff > 2,
     "text-error": diff <= 2,
   });
-
-  const formatResponsibleNames = (responsible: Array<string>) => {
-    if (!responsible || responsible.length === 0) return "";
-    if (responsible.length === 1) return responsible[0];
-
-    const lastItem = responsible[responsible.length - 1];
-    const otherItems = responsible.slice(0, -1);
-
-    return `${otherItems.join(", ")} e ${lastItem}`;
-  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

@@ -94,6 +94,12 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
     }
   };
 
+  const handleDeleteTask = (id: Id) => {
+    const deleteTask = tasks.filter((task) => task.id !== id);
+
+    setTasks(deleteTask);
+  };
+
   return (
     <div className="min-w-screen flex min-[1300px]:grid min-[1300px]:grid-cols-4 horizontal gap-4">
       <DndContext
@@ -107,12 +113,19 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
               key={column.id}
               column={column}
               tasks={tasks.filter((task) => task.columnId === column.id)}
+              handleDeleteTask={handleDeleteTask}
             />
           ))}
         </SortableContext>
         {createPortal(
           <DragOverlay>
-            {activeTask && <TaskCard task={activeTask} />}
+            {activeTask && (
+              <TaskCard
+                task={activeTask}
+                className="rotate-6"
+                handleDeleteTask={handleDeleteTask}
+              />
+            )}
           </DragOverlay>,
           document.body
         )}
