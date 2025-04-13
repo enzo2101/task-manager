@@ -57,3 +57,7 @@ Este é um projeto desenvolvido para o processo seletivo de Desenvolvedor(a) Fro
 ## ▶️ Como rodar localmente
 
 1. pnpm install || yarn install || npm install
+
+2. pnpm start || yarn start || npm start
+
+3. pnpm storybook || yarn storybook || npm storybook
