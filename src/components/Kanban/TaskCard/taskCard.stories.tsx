@@ -86,7 +86,7 @@ export const Late5Days: Story = {
   },
 };
 
-export const Late10Days: Story = {
+export const CompleteTask: Story = {
   args: {
     task: {
       title: "Pesquisa de Mercado",
@@ -94,7 +94,7 @@ export const Late10Days: Story = {
         "Criar um protótipo funcional e detalhado da nova funcionalidade inovadora do produto para uma apresentação impactante",
       dueDate: moment().subtract(10, "days"),
       responsible: ["Enzo"],
-      columnId: 1,
+      columnId: 4,
       id: 12738,
     },
   },
