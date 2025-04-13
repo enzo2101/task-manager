@@ -56,9 +56,12 @@ export default function FormTask({ onSubmit }: FormTaskProps) {
   });
 
   const responsibles = [
-    { value: "Matheus Gomes", label: "Matheus Gomes" },
-    { value: "Pedro Paulo", label: "Pedro Paulo" },
-    { value: "Paulo", label: "Paulo" },
+    { value: "Pedro", label: "Pedro" },
+    { value: "Henrique", label: "Henrique" },
+    { value: "Guilherme", label: "Guilherme" },
+    { value: "José", label: "José" },
+    { value: "Michael", label: "Michael" },
+    { value: "Joao", label: "Joao" },
   ];
 
   useEffect(() => {
