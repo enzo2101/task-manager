@@ -11,11 +11,10 @@ import { useTasks } from "@/contexts/Tasks";
 
 interface TaskCardProps {
   task: Task;
-  columnId?: Id;
   className?: string;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, columnId, className }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task, className }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mouseIsOver, setMouseIsOver] = useState(false);
 
@@ -38,7 +37,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, columnId, className }) => {
     transform: CSS.Transform.toString(transform),
   };
 
-  const isTaskCompleted = columnId === 4;
+  const isTaskCompleted = task.columnId === 4;
 
   const renderDaysRemaining = useMemo(() => {
     const today = moment().startOf("day");

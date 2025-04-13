@@ -49,7 +49,7 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
         <div className="flex flex-col gap-3 pt-2">
           <SortableContext items={tasksId}>
             {tasks.map((task) => (
-              <TaskCard key={task.id} task={task} columnId={column.id} />
+              <TaskCard key={task.id} task={task} />
             ))}
           </SortableContext>
         </div>
