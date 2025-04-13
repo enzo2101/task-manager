@@ -1,5 +1,5 @@
 import type React from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import moment from "moment";
 import { cn } from "@/lib/utils";
 import { formatResponsibleNames } from "@/lib/helpers";
@@ -31,7 +31,9 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, isOpen, onClose }) => {
         <div className="grid gap-4 py-4">
           <div className="flex justify-between items-start">
             <div className="flex flex-col gap-2">
-              <h1 className="text-base font-semibold">{task.title}</h1>
+              <DialogTitle className="text-base font-semibold">
+                {task.title}
+              </DialogTitle>
               <div className="flex ">
                 <p className="text-xs text-label"> </p>
                 <p className="rounded-lg text-xs text-label">
