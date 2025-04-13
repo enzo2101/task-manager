@@ -18,7 +18,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, className }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mouseIsOver, setMouseIsOver] = useState(false);
 
-  const { handleDeleteTask } = useTasks();
+  const { handleDeleteTask, updateTask } = useTasks();
 
   const {
     setNodeRef,
@@ -39,6 +39,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, className }) => {
 
   const isTaskCompleted = task.columnId === 4;
 
+  useMemo(() => {
+    if (isTaskCompleted) {
+      updateTask(task.id);
+    }
+  }, [isTaskCompleted, task.id]);
+
   const renderDaysRemaining = useMemo(() => {
     const today = moment().startOf("day");
     const finalDay = moment(task.dueDate).startOf("day");
@@ -50,17 +56,28 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, className }) => {
     return (
       <p
         className={cn("p-2 text-xs font-semibold", {
-          "text-success": diff >= 10,
-          "text-danger": diff < 10 && diff > 2,
-          "text-error": diff <= 2,
+          "text-success":
+            (task.doneDate &&
+              moment(task.doneDate).isSameOrBefore(task.dueDate)) ||
+            (!task.doneDate && diff >= 10),
+
+          "text-error":
+            (task.doneDate && moment(task.doneDate).isAfter(task.dueDate)) ||
+            (!task.doneDate && diff <= 2),
+
+          "text-danger": !task.doneDate && diff < 10 && diff > 2,
         })}
       >
-        {diff >= 0
+        {task.doneDate
+          ? moment(task.doneDate).isSameOrBefore(task.dueDate)
+            ? "Finalizado dentro do prazo"
+            : "Finalizado fora do prazo"
+          : diff >= 0
           ? `Faltam ${verifyMultipleDays}`
           : `Atrasado há ${verifyMultipleDays}`}
       </p>
     );
-  }, [task.dueDate]);
+  }, [task.doneDate, task.dueDate]);
 
   if (isDragging) {
     return (
