@@ -1,13 +1,29 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import TaskCard from ".";
 import moment from "moment";
+import { TasksProvider } from "@/contexts/Tasks";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const meta: Meta<typeof TaskCard> = {
   title: "Components/Kanban/TaskCard",
   component: TaskCard,
   decorators: [
     (Story) => {
-      return <div className="w-96">{Story()}</div>;
+      const queryClient = new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      });
+
+      return (
+        <div className="w-96">
+          <QueryClientProvider client={queryClient}>
+            <TasksProvider>{Story()}</TasksProvider>
+          </QueryClientProvider>
+        </div>
+      );
     },
   ],
 };
@@ -26,6 +42,7 @@ export const Last10Days: Story = {
       responsible: ["Enzo"],
       columnId: 1,
       id: 12738,
+      doneDate: undefined,
     },
   },
 };
@@ -40,6 +57,7 @@ export const Last5Days: Story = {
       responsible: ["Enzo"],
       columnId: 1,
       id: 12738,
+      doneDate: undefined,
     },
   },
 };
@@ -54,6 +72,7 @@ export const Last1Days: Story = {
       responsible: ["Enzo"],
       columnId: 1,
       id: 12738,
+      doneDate: undefined,
     },
   },
 };
@@ -68,6 +87,7 @@ export const Late1Days: Story = {
       responsible: ["Enzo"],
       columnId: 1,
       id: 12738,
+      doneDate: undefined,
     },
   },
 };
@@ -82,11 +102,12 @@ export const Late5Days: Story = {
       responsible: ["Enzo"],
       columnId: 1,
       id: 12738,
+      doneDate: undefined,
     },
   },
 };
 
-export const CompleteTask: Story = {
+export const CompleteTaskOutOfDate: Story = {
   args: {
     task: {
       title: "Pesquisa de Mercado",
@@ -96,6 +117,22 @@ export const CompleteTask: Story = {
       responsible: ["Enzo"],
       columnId: 4,
       id: 12738,
+      doneDate: moment().toISOString(),
+    },
+  },
+};
+
+export const CompleteTaskOnOfDate: Story = {
+  args: {
+    task: {
+      title: "Pesquisa de Mercado",
+      description:
+        "Criar um protótipo funcional e detalhado da nova funcionalidade inovadora do produto para uma apresentação impactante",
+      dueDate: moment().add(10, "days"),
+      responsible: ["Enzo"],
+      columnId: 4,
+      id: 12738,
+      doneDate: moment().toISOString(),
     },
   },
 };
