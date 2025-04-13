@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import AddTaskButton from "./components/AddTaskButton";
-import CarouselButtons from "./components/CarouselButtons";
 import Header from "./components/Header";
 import Kanban from "./components/Kanban";
 import { FormTaskValues } from "./components/AddTaskButton/FormTask";
@@ -45,17 +44,14 @@ function App() {
           <Header />
           <AddTaskButton createTask={createTask} />
         </div>
-        <div className="flex flex-col gap-4">
-          <CarouselButtons />
-          <div className="max-w-dvw overflow-auto [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-input">
-            {fetchTasks.isLoading ? (
-              <div>
-                <Spinner />
-              </div>
-            ) : (
-              <Kanban setTasks={setTasks} tasks={tasks} />
-            )}
-          </div>
+        <div className="max-w-dvw overflow-auto [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-input">
+          {fetchTasks.isLoading ? (
+            <div>
+              <Spinner />
+            </div>
+          ) : (
+            <Kanban setTasks={setTasks} tasks={tasks} />
+          )}
         </div>
       </div>
     </div>

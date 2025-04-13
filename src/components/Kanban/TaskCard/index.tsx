@@ -95,7 +95,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
         </div>
         <div className="flex gap-2">
           {task.responsible.map((responsible) => (
-            <p className="bg-secound rounded-lg p-2 text-white text-center text-xs w-fit h-fit">
+            <p
+              key={responsible}
+              className="bg-secound rounded-lg p-2 text-white text-center text-xs w-fit h-fit"
+            >
               {responsible}
             </p>
           ))}
