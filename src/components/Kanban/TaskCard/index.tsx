@@ -7,22 +7,19 @@ import TaskModal from "../TaskModal";
 import { ArchiveTick, Trash } from "iconsax-react";
 import { ThemeColors } from "@/lib/enums";
 import TaskSubButton from "./TaskSubButton";
+import { useTasks } from "@/contexts/Tasks";
 
 interface TaskCardProps {
   task: Task;
   columnId?: Id;
   className?: string;
-  handleDeleteTask: (id: Id) => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({
-  task,
-  columnId,
-  className,
-  handleDeleteTask,
-}) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task, columnId, className }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mouseIsOver, setMouseIsOver] = useState(false);
+
+  const { handleDeleteTask } = useTasks();
 
   const {
     setNodeRef,

@@ -5,6 +5,7 @@ import { ApiProvider } from "./contexts/Api.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./router/index.tsx";
+import { TasksProvider } from "./contexts/Tasks/index.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,9 +19,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ApiProvider>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
+        <TasksProvider>
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
+        </TasksProvider>
       </QueryClientProvider>
     </ApiProvider>
   </StrictMode>

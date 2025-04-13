@@ -7,14 +7,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 interface ColumnContainerProps {
   column: Column;
   tasks: Task[];
-  handleDeleteTask: (id: Id) => void;
 }
 
-const ColumnContainer: React.FC<ColumnContainerProps> = ({
-  column,
-  tasks,
-  handleDeleteTask,
-}) => {
+const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
   const { setNodeRef, attributes, listeners, transform, transition } =
     useSortable({
       id: column.id,
@@ -54,12 +49,7 @@ const ColumnContainer: React.FC<ColumnContainerProps> = ({
         <div className="flex flex-col gap-3 pt-2">
           <SortableContext items={tasksId}>
             {tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                task={task}
-                columnId={column.id}
-                handleDeleteTask={handleDeleteTask}
-              />
+              <TaskCard key={task.id} task={task} columnId={column.id} />
             ))}
           </SortableContext>
         </div>

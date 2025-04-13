@@ -9,13 +9,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import FormTask, { FormTaskValues } from "./FormTask";
+import { useTasks } from "@/contexts/Tasks";
 
-interface AddTaskButtonProps {
-  createTask: (task: FormTaskValues) => void;
-}
-
-const AddTaskButton: React.FC<AddTaskButtonProps> = ({ createTask }) => {
+const AddTaskButton: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const { createTask } = useTasks();
 
   const handleSubmit = (values: FormTaskValues) => {
     createTask(values);

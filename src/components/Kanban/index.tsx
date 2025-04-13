@@ -16,14 +16,12 @@ import ColumnContainer from "./ColumnContainer";
 import TaskCard from "./TaskCard";
 import { createPortal } from "react-dom";
 import { coordinateGetter } from "./multipleContainersKeyboardPreset";
+import { useTasks } from "@/contexts/Tasks";
 
-interface Kanban {
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-  tasks: Task[];
-}
-
-const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
+const Kanban: React.FC = () => {
   const [activeTask, setActiveTask] = useState<Task | null>(null);
+
+  const { setTasks, tasks } = useTasks();
 
   const sensors = useSensors(
     useSensor(MouseSensor),
@@ -94,12 +92,6 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
     }
   };
 
-  const handleDeleteTask = (id: Id) => {
-    const deleteTask = tasks.filter((task) => task.id !== id);
-
-    setTasks(deleteTask);
-  };
-
   return (
     <div className="min-w-screen flex min-[1300px]:grid min-[1300px]:grid-cols-4 horizontal gap-4">
       <DndContext
@@ -113,7 +105,6 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
               key={column.id}
               column={column}
               tasks={tasks.filter((task) => task.columnId === column.id)}
-              handleDeleteTask={handleDeleteTask}
             />
           ))}
         </SortableContext>
@@ -123,7 +114,6 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
               <TaskCard
                 task={activeTask}
                 className="rotate-6 hover:cursor-grabbing"
-                handleDeleteTask={handleDeleteTask}
               />
             )}
           </DragOverlay>,

@@ -5,6 +5,11 @@ import moment from "moment";
 const meta: Meta<typeof TaskCard> = {
   title: "Components/Kanban/TaskCard",
   component: TaskCard,
+  decorators: [
+    (Story) => {
+      return <div className="w-96">{Story()}</div>;
+    },
+  ],
 };
 
 export default meta;
