@@ -108,7 +108,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
     <Dialog open={deleteMode} onOpenChange={setDeleteMode}>
       <div
         className={cn(
-          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative cursor-grab focus:cursor-grabbing",
+          "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative cursor-grab",
           { "border border-success": isTaskCompleted },
           className
         )}

@@ -122,7 +122,7 @@ const Kanban: React.FC<Kanban> = ({ setTasks, tasks }) => {
             {activeTask && (
               <TaskCard
                 task={activeTask}
-                className="rotate-6"
+                className="rotate-6 hover:cursor-grabbing"
                 handleDeleteTask={handleDeleteTask}
               />
             )}
