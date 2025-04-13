@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import TaskModal from "../TaskModal";
 import { ArchiveTick, Trash } from "iconsax-react";
 import { ThemeColors } from "@/lib/enums";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import TaskSubButton from "./TaskSubButton";
 
 interface TaskCardProps {
@@ -23,7 +22,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   handleDeleteTask,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deleteMode, setDeleteMode] = useState(false);
+  const [mouseIsOver, setMouseIsOver] = useState(false);
 
   const {
     setNodeRef,
@@ -108,13 +107,15 @@ const TaskCard: React.FC<TaskCardProps> = ({
   }
 
   return (
-    <Dialog open={deleteMode} onOpenChange={setDeleteMode}>
+    <>
       <div
         className={cn(
           "bg-white p-6 rounded-3xl flex flex-col gap-4 shadow-[0px_4px_14px_0px_rgba(231,_237,_240,_0.3)] h-fit min-w-80 relative cursor-grab",
           { "border border-success": isTaskCompleted },
           className
         )}
+        onMouseEnter={() => setMouseIsOver(true)}
+        onMouseLeave={() => setMouseIsOver(false)}
         ref={setNodeRef}
         style={style}
         onClick={() => setIsModalOpen(true)}
@@ -132,13 +133,14 @@ const TaskCard: React.FC<TaskCardProps> = ({
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <h1 className="text-base font-semibold">{task.title}</h1>
-            <DialogTrigger asChild>
+            {mouseIsOver && (
               <TaskSubButton
                 icon={Trash}
                 onClick={() => handleDeleteTask(task.id)}
                 color={ThemeColors.ERROR}
+                className="opacity-60 hover:opacity-100"
               />
-            </DialogTrigger>
+            )}
           </div>
           <div className="h-10">
             <p className="text-sm text-label line-clamp-2">
@@ -165,7 +167,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-    </Dialog>
+    </>
   );
 };
 
