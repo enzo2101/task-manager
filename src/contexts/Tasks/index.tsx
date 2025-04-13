@@ -6,8 +6,8 @@ import React, { useContext, createContext, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
 interface TasksContextValues {
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Array<Task>>>;
+  tasks: Array<Task>;
   handleDeleteTask: (id: Id) => void;
   createTask: (values: FormTaskValues) => void;
   isApiTasksLoading: boolean;
@@ -22,7 +22,7 @@ interface TasksProviderProps {
 }
 
 export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Array<Task>>([]);
 
   const { getTasks } = useStartTasks();
 

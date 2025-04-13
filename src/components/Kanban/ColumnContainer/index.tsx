@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ColumnContainerProps {
   column: Column;
-  tasks: Task[];
+  tasks: Array<Task>;
 }
 
 const ColumnContainer: React.FC<ColumnContainerProps> = ({ column, tasks }) => {
